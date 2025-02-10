@@ -22,6 +22,7 @@ public class MsgFilter extends HttpFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		System.out.println("[MsgFilter]요청 가로챔");
 		MsgReqeustWrapper mrw 
 			= new MsgReqeustWrapper((HttpServletRequest)request);
