@@ -13,8 +13,17 @@
 	<%if(session.isNew() || session.getAttribute("account") == null) {%>
 		<a href="/login">로그인</a>
 	<%} else{%>
-		로그인한 사용자 정보 출력
+		<a href="/logout">로그아웃</a>
 	<%} %>
+	<h2>쇼핑하기</h2>
+	<ul>
+		<li>
+			<a href="/productList">상품목록</a>
+		</li>
+		<li>
+			<a href="/cartList">장바구니</a>
+		</li>
+	</ul>
 	<h1>쿠키 연습하기</h1>
 	<ul>
 		<li>

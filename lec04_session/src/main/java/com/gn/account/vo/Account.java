@@ -1,4 +1,4 @@
-package com.gn.account.controller;
+package com.gn.account.vo;
 
 public class Account {
 	private int accountNo;
