@@ -30,7 +30,7 @@ rel="stylesheet" type="text/css">
 				</form>
 			</div>
 			<div class="login">
-				<a href="#">로그인</a>
+				<a href="/memberLogin">로그인</a>
 			</div>
 		</div>
 	</section>
@@ -57,13 +57,16 @@ rel="stylesheet" type="text/css">
 				$.ajax({
 					url:"/memberCreateEnd",
 					type:"post",
-					data:{"member_id":form.member_id.value,
+					data:{member_id:form.member_id.value,
 						"member_pw":form.member_pw.value,
 						"member_name":form.member_name.value},
 					dataType:"JSON",
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 					success:function(data){
-						console.log(data);
+						alert(data.res_msg);
+						if(data.res_code == 200){
+							location.href="/";
+						}
 					}
 				});
 			}
