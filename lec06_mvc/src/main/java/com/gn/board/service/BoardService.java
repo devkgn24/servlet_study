@@ -18,6 +18,7 @@ public class BoardService {
 		Connection conn = getConnection();
 		List<Board> resultList = new ArrayList<Board>();
 		resultList = new BoardDao().selectBoardList(conn);
+		close(conn);
 		return resultList;
 	}
 	
