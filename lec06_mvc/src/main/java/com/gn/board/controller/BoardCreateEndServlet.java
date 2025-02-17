@@ -15,6 +15,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.gn.board.service.BoardService;
 import com.gn.board.vo.Attach;
 import com.gn.board.vo.Board;
 
@@ -90,6 +91,7 @@ public class BoardCreateEndServlet extends HttpServlet {
 			System.out.println(b);
 			System.out.println(a);
 			// 2. 지정한 경로에 파일 업로드 되었는지 확인
+			int result = new BoardService().createBoard(b,a);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
