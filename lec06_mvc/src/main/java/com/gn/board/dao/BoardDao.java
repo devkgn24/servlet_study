@@ -41,10 +41,30 @@ public class BoardDao {
 	}
 	
 	public int insertAttach(Attach a, Connection conn) {
-		// 1. board_no
-		// 2. ori_name
-		// 3. new_name
-		// 4. attach_path
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int attachNo = 0;
+		try {
+			String sql = "INSERT INTO `attach`(board_no ,ori_name ,new_name ,attach_path) "
+					+ "VALUES(?,?,?,?)";
+			pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+			pstmt.setInt(1, a.getBoardNo());
+			pstmt.setString(2, a.getOriName());
+			pstmt.setString(3, a.getNewName());
+			pstmt.setString(4, a.getAttachPath());
+			
+			attachNo = pstmt.executeUpdate();
+			rs = pstmt.getGeneratedKeys();
+			if(rs.next()) {
+				attachNo = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return attachNo;
 	}
 	
 	
