@@ -3,6 +3,7 @@ package com.gn.board.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,12 +53,44 @@ public class BoardCreateEndServlet extends HttpServlet {
 				FileItem fileItem = items.get(i);
 				if(fileItem.isFormField()) {
 					// (1) 파일이 아닌 폼 내부 요소
-					System.out.println(fileItem.getFieldName());
+					// System.out.println(fileItem.getFieldName());
+					switch(fileItem.getFieldName()) {
+						case "board_title":
+							b.setBoardTitle(fileItem.getString("utf-8"));
+							break;
+						case "board_content":
+							b.setBoardContent(fileItem.getString("utf-8"));
+							break;
+						case "board_writer":
+							b.setBoardWriter(Integer.parseInt(fileItem.getString("utf-8")));
+							break;
+					}
 				} else {
 					// (2) 파일 형태의 폼 요소
-					System.out.println(fileItem.getName());
+					// System.out.println(fileItem.getName());
+					if(fileItem.getSize() > 0) {
+						String oriName = fileItem.getName();
+						int idx = oriName.lastIndexOf(".");
+						String ext = oriName.substring(idx);
+						
+						String uuid = UUID.randomUUID().toString().replace("-", "");
+						String newName = uuid+ext;
+						
+						File uploadFile = new File(dir,newName);
+						fileItem.write(uploadFile);
+						
+						a.setOriName(oriName);
+						a.setNewName(newName);
+						// C:\\upload\\board\\새로운이름.확장자
+						a.setAttachPath(path+"\\"+newName);
+					}
 				}
 			}
+			// 1. 바구니에 데이터 들어있는지 확인
+			System.out.println(b);
+			System.out.println(a);
+			// 2. 지정한 경로에 파일 업로드 되었는지 확인
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
