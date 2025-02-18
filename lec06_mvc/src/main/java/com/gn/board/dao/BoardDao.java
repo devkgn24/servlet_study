@@ -14,7 +14,7 @@ import com.gn.board.vo.Board;
 
 public class BoardDao {
 	
-	public List<Board> selectBoardList(Connection conn) {
+	public List<Board> selectBoardList(Connection conn,Board option) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Board> list = new ArrayList<Board>();
@@ -22,7 +22,10 @@ public class BoardDao {
 			String sql = "SELECT * "
 					+ "FROM `board` b "
 					+"JOIN `member` m "
-					+"ON b.board_writer = m.member_no";
+					+"ON b.board_writer = m.member_no ";
+			if(option.getBoardTitle() != null) {
+				sql += "WHERE board_title LIKE CONCAT('%','"+option.getBoardTitle()+"','%')";
+			}
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {

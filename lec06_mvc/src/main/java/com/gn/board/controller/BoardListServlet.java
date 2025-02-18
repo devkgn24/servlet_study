@@ -22,7 +22,14 @@ public class BoardListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Board> resultList = new BoardService().selectBoardList();
+		String boardTitle = request.getParameter("board_title");
+//		String searchType = request.getParameter("search_type");
+//		String searchText = request.getParameter("search_text");		
+		
+		Board option = new Board();
+		option.setBoardTitle(boardTitle);
+		
+		List<Board> resultList = new BoardService().selectBoardList(option);
 		
 		
 		RequestDispatcher view = request.getRequestDispatcher("/views/board/list.jsp");

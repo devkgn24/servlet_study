@@ -12,6 +12,16 @@
 	<%@ include file="/views/include/nav.jsp" %>
 	<section>
 		<div id="section_wrap">
+			<div class="search">
+				<form action="/boardList" name="search_board_form" method="get">
+					<input type="text" name="board_title" placeholder="검색하고자 하는 게시글 제목을 입력하세요.">
+<!-- 					<select name="search_type">
+						<option value="1">제목</option>
+						<option value="2">내용</option>
+					</select> -->
+					<input type="submit" value="검색">
+				</form>	
+			</div>
 			<div class="word">
 				<h3>게시글 목록</h3>
 			</div><br>
@@ -32,7 +42,18 @@
 						</tr>
 					</thead>
 					<tbody>
-						
+						<%@ page import="com.gn.board.vo.Board, java.util.*, java.time.format.*" %>
+						<% 
+							List<Board> list = (List<Board>)request.getAttribute("resultList");
+							DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm");
+							for(int i = 0 ; i < list.size() ; i++){ %>
+								<tr>
+									<td><%=list.get(i).getBoardNo() %></td>
+									<td><%=list.get(i).getBoardTitle() %></td>
+									<td><%=list.get(i).getMemberName() %></td>
+									<td><%=list.get(i).getRegDate().format(dtf) %></td>
+								</tr>
+						<% } %>
 					</tbody>
 				</table>
 			</div>
