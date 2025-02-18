@@ -29,6 +29,9 @@ public class BoardListServlet extends HttpServlet {
 		Board option = new Board();
 		option.setBoardTitle(boardTitle);
 		
+		int totalData = new BoardService().selectBoardCount(option);
+		option.setTotalData(totalData);
+		
 		List<Board> resultList = new BoardService().selectBoardList(option);
 		
 		
