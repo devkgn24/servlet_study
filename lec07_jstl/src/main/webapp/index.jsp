@@ -102,5 +102,62 @@
 	</p>
 	<hr>
 	<h1>JSTL</h1>
+	<h2>1. 변수</h2>
+	<c:set var="n1" value="15"/>
+	<c:set var="n2" value="20"/>
+	<c:set var="result" value="${n1+n2 }"/>
+	
+	<c:out value="${result }"/>
+	
+	<c:set var="hello" value="<b>안녕하세요!</b>"/>
+	<c:out value="${hello }" escapeXml="false"/>
+	
+	<h2>2. 조건문(if)</h2>
+	<c:if test="${num1 le num2}">
+		<p>num1이 num2보다 작거나 같다.</p>
+	</c:if>
+	<h2>3. 조건문(choose)</h2>
+	<c:choose>
+		<c:when test="${num1 gt 20 }">
+			<p>10이 20보다 큽니까?</p>
+		</c:when>
+		<c:when test="${num1 ge 10 }">
+			<p>num1이 10보다 크거나 같으면서, 20보다 작거나 같나요?</p>
+		</c:when>
+		<c:otherwise>
+			<p>num1이 10보다 작습니까?</p>
+		</c:otherwise>
+	</c:choose>
+	<h2>4.반복문</h2>
+	<c:forEach var="i" begin="1" end="10" step="2">
+		<p>반복 숫자 : ${i }</p>
+	</c:forEach>
+	<%
+		String[] colors={"red","green","blue"};
+		request.setAttribute("colors",colors);
+	%>
+	<ul>
+		<c:forEach var="color" items="${colors}">
+			<li style="color:${color}">${color }</li>
+		</c:forEach>
+	</ul>
+	<c:forEach var="i" begin="1" end="6">
+		<h${i}>Hello, World!</h${i}>
+	</c:forEach>
+	
+	<c:forEach var="num" begin="2" end="5" varStatus="vs">
+		<p <c:if test="${vs.first }">style="color:red"</c:if>>
+			인덱스 : ${vs.index }<br>
+			카운트 : ${vs.count }<br>
+			첫번째인가요? : ${vs.first }<br>
+			마지막인가요? : ${vs.last }
+		</p>
+	</c:forEach>
+	
+	<c:set var="boardTitle" value="제목테스트"/>
+	<c:set var="titleParam" value="&board_title="/>
+	<p>
+		<c:out value="${titleParam}${boardTitle}"/>
+	</p>
 </body>
 </html>
