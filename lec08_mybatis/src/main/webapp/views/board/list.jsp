@@ -19,8 +19,22 @@
 			</tr>
 		</thead>
 		<tbody>
-			<!-- resultList가 비어있으면 -> 게시글이 없습니다.
-			그렇지 않으면 -> 번호, 제목, 내용 출력 -->
+			<c:choose>
+				<c:when test="${empty resultList}">
+					<tr>
+						<td colspan="4">게시글이 없습니다.</td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${resultList}" var="b" varStatus="vs">
+						<tr>
+							<td><c:out value="${vs.count}"/></td>
+							<td><c:out value="${b.boardTitle}"/></td>
+							<td><c:out value="${b.boardContent}"/></td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</tbody>
 	</table>
 </body>
