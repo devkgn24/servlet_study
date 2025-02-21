@@ -32,7 +32,17 @@
 		</li> --%>
 		<li>수정</li>
 		<li>삭제</li>
-		<li>등록</li>
+		<li>
+		<form action="<c:url value='/boardCreate'/>" method="post">
+			<fieldset>
+				<legend>게시글</legend>
+				<input type="text" name="board_title"><br>
+				<input type="text" name="board_content"><br>
+				<input type="hidden" name="board_writer"><br>
+				<input type="submit" value="등록">
+			</fieldset>
+		</form>
+		</li>
 	</ol>
 </body>
 </html>
