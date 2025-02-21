@@ -12,6 +12,21 @@ import com.gn.board.vo.Board;
 
 public class BoardService {
 	
+	public int insertMany(List<Board> list) {
+		SqlSession session = getSqlSession();
+		int result 
+			= new BoardDao().insertMany(session,list);
+		session.close();
+		return result;
+	}
+	
+	public int insertBoard(Board b) {
+		SqlSession session = getSqlSession();
+		int result = new BoardDao().insertBoard(session,b);
+		session.close();
+		return result;
+	}
+	
 	public int deleteBoard(int boardNo) {
 		SqlSession session = getSqlSession();
 		int result = new BoardDao().deleteBoard(session,boardNo);
@@ -49,9 +64,9 @@ public class BoardService {
 		return board;
 	}
 	
-	public List<Board> selectBoardList(){
+	public List<Board> selectBoardList(Board option){
 		SqlSession session = getSqlSession();
-		List<Board> resultList = new BoardDao().selectBoardList(session);
+		List<Board> resultList = new BoardDao().selectBoardList(session,option);
 		session.close();
 		return resultList;
 	}

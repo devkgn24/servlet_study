@@ -9,6 +9,18 @@ import com.gn.board.vo.Board;
 
 public class BoardDao {
 	
+	public int insertMany(SqlSession session, List<Board> list) {
+		return session.insert("boardMapper.insertMany", list);
+	}
+	
+	public int insertBoard(SqlSession session,Board board) {
+		System.out.println("실행전 : "+board);
+		int result = session.insert("boardMapper.insertBoard",board);
+		System.out.println("실행후 : "+board);
+		result = board.getBoardNo();
+		return result;
+	}
+	
 	public int deleteBoard(SqlSession session, int boardNo) {
 		return session.delete("boardMapper.deleteBoard",boardNo);
 	}
@@ -29,8 +41,8 @@ public class BoardDao {
 		return session.selectOne("boardMapper.boardOne",boardNo);
 	}
 	
-	public List<Board> selectBoardList(SqlSession session){
+	public List<Board> selectBoardList(SqlSession session,Board option){
 		// 매개변수 : mapper의 namespace.쿼리문의 id
-		return session.selectList("boardMapper.boardList");
+		return session.selectList("boardMapper.boardList",option);
 	}
 }

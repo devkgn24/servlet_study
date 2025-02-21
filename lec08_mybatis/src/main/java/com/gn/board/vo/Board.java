@@ -22,4 +22,6 @@ public class Board {
 	private int boardWriter;
 	private LocalDateTime regDate;
 	private LocalDateTime modDate;
+	private String memberName;
+	private String orderType;
 }
