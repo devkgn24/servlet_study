@@ -23,13 +23,13 @@
 			</a>
 <%-- 			<a href="${url}">상세조회</a>	 --%>
 		</li>
-		<li>
+<%-- 		<li>
 			<c:url value="/boardDetail" var="detailUrl">
 				<c:param name="board_title" value="제목"/>
 				<c:param name="board_content" value="내용"/>
 			</c:url>
 			<a href="${detailUrl }">상세조회(2)</a>
-		</li>
+		</li> --%>
 		<li>수정</li>
 		<li>삭제</li>
 		<li>등록</li>

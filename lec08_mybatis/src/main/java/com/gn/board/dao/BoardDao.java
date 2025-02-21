@@ -9,6 +9,14 @@ import com.gn.board.vo.Board;
 
 public class BoardDao {
 	
+	public int deleteBoard(SqlSession session, int boardNo) {
+		return session.delete("boardMapper.deleteBoard",boardNo);
+	}
+	
+	public int updateBoard(SqlSession session, Board board) {
+		return session.update("boardMapper.boardUpdate",board);
+	}
+	
 	public Board selectBoardThree(SqlSession session,Board option) {
 		return session.selectOne("boardMapper.boardThree",option);
 	}

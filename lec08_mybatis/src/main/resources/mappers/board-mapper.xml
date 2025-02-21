@@ -11,6 +11,16 @@
 		<result property="regDate" column="reg_date"/>
 		<result property="modDate" column="mod_date"/>	
 	</resultMap>
+	<delete id="deleteBoard" parameterType="_int">
+		DELETE FROM board
+		WHERE board_no = #{boradNo}
+	</delete>
+	<update id="boardUpdate" parameterType="board">
+		UPDATE `board`
+		SET board_title = #{boardTitle}
+		,board_content = #{boardContent}
+		WHERE board_no = #{boardNo}
+	</update>
 	
 	<select id="boardThree" resultMap="boardMap" 
 	parameterType="board">

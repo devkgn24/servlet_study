@@ -12,6 +12,22 @@ import com.gn.board.vo.Board;
 
 public class BoardService {
 	
+	public int deleteBoard(int boardNo) {
+		SqlSession session = getSqlSession();
+		int result = new BoardDao().deleteBoard(session,boardNo);
+		session.close();
+		return result;
+	}
+	
+	public int updateBoard(Board board) {
+		SqlSession session = getSqlSession();
+		int result = new BoardDao().updateBoard(session,board);
+		// session.commit();
+		// session.rollback();
+		session.close();
+		return result;
+	}
+	
 	public Board selectBoardThree(Board option) {
 		SqlSession session = getSqlSession();
 		Board board = new BoardDao().selectBoardThree(session,option);
